@@ -4,8 +4,7 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
 
     // Create alphabet
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-
-
+    
     return(
         <main className="flex flex-col gap-2 items-center text-white">
 
@@ -18,7 +17,7 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
 
             {/* Mystery word and keyboard */}
 
-            <div className="flex flex-col py-8 gap-4">
+            <div className="flex flex-col py-8 gap-8">
                 <div className="flex justify-center gap-2">
                     {mysteryWord.map((letter, index) => (
                         <span
@@ -29,9 +28,13 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
                         </span>
                     ))}
                 </div>
-                <div>
+                <div className="flex flex-wrap justify-center gap-4 border-1 rounded-sm p-2">
                     {alphabet.map((letter, index) => (
-                        <button key={index} onClick={onLetterClick}>{letter}</button>
+                        <button
+                            key={index} 
+                            onClick={onLetterClick}
+                            className="border-1 rounded-sm p-2 cursor-pointer hover:bg-white hover:text-primary-blue"
+                        >{letter}</button>
                     ))}
                 </div>
             </div>
