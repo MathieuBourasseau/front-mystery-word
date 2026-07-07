@@ -4,15 +4,23 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
 
     // Create alphabet
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    
+
+    // Create an empty Array with the value of hearts
+    const heartsArray = Array(hearts).fill(null);
+
     return(
-        <main className="flex flex-col gap-2 items-center text-white">
+        <main className="flex flex-col gap-2 items-center justify-center text-white">
 
             <h1 className="uppercase font-bold text-lg">Devinez le mot caché</h1>
 
             {/* Life remaining */}
-            <div>
+            <div className="flex flex-col  items-center w-full">
                 <span>Vies restantes : {hearts}</span>
+                <div>
+                    {heartsArray.map((heart, index) => (
+                        <span key={index}>❤️</span>
+                    ))}
+                </div>
             </div>
 
             {/* Mystery word and keyboard */}
