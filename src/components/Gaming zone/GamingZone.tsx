@@ -40,9 +40,11 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
                     {alphabet.map((letter, index) => (
                         <button
                             key={index} 
-                            onClick={onLetterClick}
+                            onClick={() => onLetterClick(letter)}
                             className="border-1 rounded-sm p-2 cursor-pointer hover:bg-white hover:text-primary-blue"
-                        >{letter}</button>
+                        >
+                            {letter}
+                        </button>
                     ))}
                 </div>
             </div>

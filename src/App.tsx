@@ -16,14 +16,19 @@ function App() {
   // State for color letters
   const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ "A" : true, "Z" : false})
 
+  // State for letter clicked
+  const [letterClicked, setLetterClicked] = useState("");
+
+
   // Reset game and increment counter
   const resetGame = () => {
     setGamesPlayed(gamesPlayed + 1);
   }
 
   // Send the letter clicked to the back for checking
-  const sendLetter = () => {
-
+  const sendLetter = (letter: string) => {
+    setLetterClicked(letter);
+    console.log(letter);
   }
 
 
