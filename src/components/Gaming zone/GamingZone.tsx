@@ -62,6 +62,7 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
                             key={index}
                             onClick={() => onLetterClick(letter)}
                             className={buttonsColor(letter)}
+                            disabled={colorLetter[letter] !== undefined}
                         >
                             {letter}
                         </button>
