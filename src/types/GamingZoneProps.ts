@@ -6,7 +6,7 @@
 
 export type GamingZoneProps = {
     hearts: number;
-    mysteryWord: string;
+    mysteryWord: string[];
     colorLetter: Record<string, boolean>;
     onLetterClick: (letter: string) => void;
 }
