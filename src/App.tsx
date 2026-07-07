@@ -12,9 +12,8 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900">
+    <div className="flex flex-col min-h-screen bg-gray-900 p-4 md:p-6">
       <Header onNewGame={resetGame} gamesPlayed={gamesPlayed} />
-      <h1 className="text-3xl font-bold text-white">Mystery Word</h1>
     </div>
   )
 }
