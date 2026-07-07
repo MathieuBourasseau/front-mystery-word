@@ -1,6 +1,6 @@
 import type { GamingZoneProps } from "../../types/GamingZoneProps"
 
-export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterClick} : GamingZoneProps) {
+export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterClick }: GamingZoneProps) {
 
     // Create alphabet
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -8,7 +8,27 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
     // Create an empty Array with the value of hearts
     const heartsArray = Array(hearts).fill(null);
 
-    return(
+    // Colored letter function
+    const buttonsColor = (letter: string) => {
+
+        // Basic classes
+        let classes = "border-1 rounded-sm p-2 cursor-pointer "
+
+        // Checking the value of the letter 
+        const isValidLetter = colorLetter[letter];
+
+        if (isValidLetter) {
+            classes += " bg-green-500 text-white";
+        } else if (isValidLetter === false) {
+            classes += " bg-red-500 text-white"
+        } else {
+            classes += " hover:bg-white hover:text-primary-blue"
+        }
+
+        return classes
+    }
+
+    return (
         <main className="flex flex-col gap-2 items-center justify-center text-white">
 
             <h1 className="uppercase font-bold text-lg">Devinez le mot caché</h1>
@@ -39,9 +59,9 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
                 <div className="flex flex-wrap justify-center gap-4 border-1 rounded-sm p-2">
                     {alphabet.map((letter, index) => (
                         <button
-                            key={index} 
+                            key={index}
                             onClick={() => onLetterClick(letter)}
-                            className="border-1 rounded-sm p-2 cursor-pointer hover:bg-white hover:text-primary-blue"
+                            className={buttonsColor(letter)}
                         >
                             {letter}
                         </button>
@@ -50,5 +70,4 @@ export default function GamingZone ({hearts, mysteryWord, colorLetter, onLetterC
             </div>
         </main>
     )
-
 }

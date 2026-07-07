@@ -16,10 +16,6 @@ function App() {
   // State for color letters
   const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ "A" : true, "Z" : false})
 
-  // State for letter clicked
-  const [letterClicked, setLetterClicked] = useState("");
-
-
   // Reset game and increment counter
   const resetGame = () => {
     setGamesPlayed(gamesPlayed + 1);
@@ -27,11 +23,17 @@ function App() {
 
   // Send the letter clicked to the back for checking
   const sendLetter = (letter: string) => {
-    setLetterClicked(letter);
-    console.log(letter);
-  }
 
+    // Checking if the letter is in the myserty word
+    const isLetterValid = mysteryWord.includes(letter);
 
+    // Update the object with the new letter tried
+    setColorLetter({ 
+      ...colorLetter, 
+      [letter]: isLetterValid
+    });
+
+  };
 
   return (
     <div className="flex flex-col gap-6 min-h-screen bg-gray-900 p-4 md:p-6">
