@@ -1,4 +1,4 @@
 export type HeaderProps = {
-    gamesPlayed: number;
     onNewGame: () => void;
+    gamesPlayed: number;
 }
