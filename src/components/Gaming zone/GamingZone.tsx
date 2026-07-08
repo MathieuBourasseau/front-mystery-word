@@ -38,7 +38,7 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
             <div className="flex flex-col gap-2 items-center w-full">
                 <span className="text-sm md:text-base lg:text-lg">Vies restantes : {hearts}</span>
                 <div className="flex gap-4">
-                    {heartsArray.map((heart, index) => (
+                    {heartsArray.map((_, index) => (
                         <FaHeart key={index} className="md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     ))}
                 </div>
