@@ -25,8 +25,13 @@ function App() {
 
     setGamesPlayed(gamesPlayed + 1);
     setHearts(5);
-    setMysteryWord("avancer".toUpperCase());
-    setColorLetter({"A" : true, "C": true});
+
+    // Pick a new random word
+    const newRandomWord = getRandomWord(list);
+    const newFirstLetter = newRandomWord[0];
+
+    setMysteryWord(newRandomWord);
+    setColorLetter({[newFirstLetter]: true});
 
   }
 
