@@ -5,7 +5,7 @@ import { generateHeartsArray, getButtonStyle } from "./gamingZone.utils";
 // Create alphabet
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterClick }: GamingZoneProps) {
+export default function GamingZone({ hearts, wordToGuess, colorLetter, onLetterClick }: GamingZoneProps) {
 
     const heartsArray = generateHeartsArray(hearts);
 
@@ -28,7 +28,7 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
 
             <div className="flex flex-col py-8 gap-8">
                 <div className="flex justify-center gap-2">
-                    {mysteryWord.map((letter, index) => (
+                    {wordToGuess.map((letter, index) => (
                         <span
                             key={index}
                             className="flex justify-center w-8 h-8 border-b-4 border-white text-lg font-bold lg:text-2xl"
