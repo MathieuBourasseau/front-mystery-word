@@ -37,11 +37,11 @@ export default function GamingZone({ hearts, wordToGuess, colorLetter, onLetterC
             {/* Mystery word and keyboard */}
 
             <div className="flex flex-col py-8 gap-8">
-                <div className="flex justify-center gap-2">
+                <div className="flex flex-wrap justify-center gap-1 md:gap-2">
                     {wordToGuess.map((letter, index) => (
                         <span
                             key={index}
-                            className="flex justify-center w-8 h-8 border-b-4 border-white text-lg font-bold lg:text-2xl"
+                            className="flex justify-center items-center w-6 h-6 border-b-4 border-white text-lg font-bold md:w-8 md:h-8 lg:text-2xl"
                         >
                             {letter}
                         </span>
