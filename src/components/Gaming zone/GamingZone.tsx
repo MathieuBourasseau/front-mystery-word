@@ -1,10 +1,10 @@
 import type { GamingZoneProps } from "../../types/GamingZoneProps"
 import { FaHeart } from "react-icons/fa";
 
-export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterClick }: GamingZoneProps) {
+// Create alphabet
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-    // Create alphabet
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterClick }: GamingZoneProps) {
 
     // Create an empty Array with the value of hearts
     const heartsArray = Array(hearts).fill(null);
