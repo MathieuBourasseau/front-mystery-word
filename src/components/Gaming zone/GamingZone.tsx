@@ -1,33 +1,13 @@
 import type { GamingZoneProps } from "../../types/GamingZoneProps"
 import { FaHeart } from "react-icons/fa";
+import { generateHeartsArray, getButtonStyle } from "./gamingZone.utils";
 
 // Create alphabet
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterClick }: GamingZoneProps) {
 
-    // Create an empty Array with the value of hearts
-    const heartsArray = Array(hearts).fill(null);
-
-    // Colored letter function
-    const buttonsColor = (letter: string) => {
-
-        // Basic classes
-        let classes = "border-1 rounded-sm p-2 cursor-pointer "
-
-        // Checking the value of the letter 
-        const isValidLetter = colorLetter[letter];
-
-        if (isValidLetter) {
-            classes += " bg-green-500 text-white";
-        } else if (isValidLetter === false) {
-            classes += " bg-red-500 text-white"
-        } else {
-            classes += " hover:bg-white hover:text-primary-blue"
-        }
-
-        return classes
-    }
+    const heartsArray = generateHeartsArray(hearts);
 
     return (
         <main className="flex flex-col gap-4 items-center justify-center text-white mx-auto max-w-mobile md:max-w-tablet md:gap-6">
@@ -62,7 +42,7 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
                         <button
                             key={index}
                             onClick={() => onLetterClick(letter)}
-                            className={buttonsColor(letter)}
+                            className={getButtonStyle(letter, colorLetter)}
                             disabled={colorLetter[letter] !== undefined}
                         >
                             {letter}
