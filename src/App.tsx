@@ -53,13 +53,23 @@ function App() {
     }
   });
 
-  // Show end game message
-  const isGameOver = hearts === 0;
+  // Show end game messages
+  const isGameLost = hearts === 0;
+  const isGameWon = !wordToGuess.includes(" ");
 
   return (
     <div className="flex flex-col gap-6 min-h-screen bg-gray-900 p-4 md:p-6">
       <Header onNewGame={resetGame} gamesPlayed={gamesPlayed} />
-      { isGameOver && (
+
+      {/* Victory message */}
+      { isGameWon && (
+        <div className="bg-white text-blue-primary p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
+          <p>Félicitations, vous avez découvert le bon mot ! 🎉 </p>
+        </div>
+      )}
+
+      {/* Defeat message */}
+      { isGameLost && (
         <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
           <p>Dommage vous avez perdu. Le mot était {mysteryWord}.</p>
         </div>
