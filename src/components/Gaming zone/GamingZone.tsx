@@ -1,4 +1,5 @@
 import type { GamingZoneProps } from "../../types/GamingZoneProps"
+import { FaHeart } from "react-icons/fa";
 
 export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterClick }: GamingZoneProps) {
 
@@ -29,16 +30,16 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
     }
 
     return (
-        <main className="flex flex-col gap-2 items-center justify-center text-white mx-auto max-w-mobile md:max-w-tablet md:gap-6">
+        <main className="flex flex-col gap-4 items-center justify-center text-white mx-auto max-w-mobile md:max-w-tablet md:gap-6">
 
             <h1 className="uppercase font-bold text-lg md:text-2xl">Devinez le mot caché</h1>
 
             {/* Life remaining */}
             <div className="flex flex-col gap-2 items-center w-full">
                 <span className="text-sm md:text-base lg:text-lg">Vies restantes : {hearts}</span>
-                <div>
+                <div className="flex gap-4">
                     {heartsArray.map((heart, index) => (
-                        <span key={index} className="">❤️</span>
+                        <FaHeart key={index} className="md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     ))}
                 </div>
             </div>
@@ -50,7 +51,7 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
                     {mysteryWord.map((letter, index) => (
                         <span
                             key={index}
-                            className="flex justify-center w-8 h-8 border-b-4 border-white text-lg"
+                            className="flex justify-center w-8 h-8 border-b-4 border-white text-lg font-bold lg:text-2xl"
                         >
                             {letter}
                         </span>
