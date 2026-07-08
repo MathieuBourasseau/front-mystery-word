@@ -56,6 +56,7 @@ function App() {
   // Show end game messages
   const isGameLost = hearts === 0;
   const isGameWon = !wordToGuess.includes(" ");
+  const isGameOver = isGameLost || isGameWon
 
   return (
     <div className="flex flex-col gap-6 min-h-screen bg-gray-900 p-4 md:p-6">
@@ -74,7 +75,19 @@ function App() {
           <p>Dommage vous avez perdu. Le mot était {mysteryWord}.</p>
         </div>
       )}
-      <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
+
+      {/* Start a new game */}
+      { isGameOver && (
+        <div class="text-white">
+            <h1>Voulez-vous rejouer ?</h1>
+            <div>
+              <p>oui</p>
+              <p>non</p>
+            </div>
+        </div>
+      )}
+
+      { !isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} /> }
     </div>
   )
 }
