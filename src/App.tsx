@@ -33,6 +33,10 @@ function App() {
       [letter]: isLetterValid
     });
 
+    // Delete one heart for each error
+    if (!isLetterValid) {
+      setHearts(hearts - 1);
+    }
   };
 
   // Show the word to guess from the real word

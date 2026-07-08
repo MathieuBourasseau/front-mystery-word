@@ -1,5 +1,5 @@
 // Generate an array according to the value of hearts
-export const generateHeartsArray = (arrayLength : number) => {
+export const generateHeartsArray = (maxHearts : number) => {
     return Array(maxHearts).fill(null)
 }
 
