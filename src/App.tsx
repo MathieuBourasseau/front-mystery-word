@@ -3,6 +3,9 @@ import Header from "./components/Header/Header";
 import GamingZone from "./components/Gaming zone/GamingZone";
 import { list, getRandomWord } from "./utils/words";
 
+// Initialise first random word
+const firstRandomWord = getRandomWord(list);
+
 function App() {
 
   // State for games played
@@ -12,7 +15,7 @@ function App() {
   const [hearts, setHearts] = useState(5);
 
   // State for mystery word
-  const [mysteryWord, setMysteryWord] = useState(getRandomWord(list));
+  const [mysteryWord, setMysteryWord] = useState(firstRandomWord);
 
   // Save the first letter of the mystery word
   const firstLetter = mysteryWord[0];
@@ -22,7 +25,6 @@ function App() {
 
   // Reset game and increment counter of games played
   const resetGame = () => {
-
     setGamesPlayed(gamesPlayed + 1);
     setHearts(5);
 
@@ -32,7 +34,6 @@ function App() {
 
     setMysteryWord(newRandomWord);
     setColorLetter({[newFirstLetter]: true});
-
   }
 
   // Send the letter clicked to the back for checking
