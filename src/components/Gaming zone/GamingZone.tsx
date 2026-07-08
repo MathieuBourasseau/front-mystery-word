@@ -6,7 +6,7 @@ import { generateHeartsArray, getButtonStyle } from "./gamingZone.utils";
 // Create alphabet
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-export default function GamingZone({ hearts, wordToGuess, colorLetter, onLetterClick }: GamingZoneProps) {
+export default function GamingZone({ hearts, wordToGuess, colorLetter, onLetterClick}: GamingZoneProps) {
 
     // Create an array with 5 fix slots
     const maxHearts = 5;

@@ -24,6 +24,11 @@ function App() {
   // Send the letter clicked to the back for checking
   const sendLetter = (letter: string) => {
 
+    // Stop game if there is not more hearts left
+    if (hearts < 0){
+      return;
+    }
+
     // Checking if the letter is in the myserty word
     const isLetterValid = mysteryWord.includes(letter);
 
@@ -48,9 +53,17 @@ function App() {
     }
   });
 
+  // Show end game message
+  const isGameOver = hearts === 0;
+
   return (
     <div className="flex flex-col gap-6 min-h-screen bg-gray-900 p-4 md:p-6">
       <Header onNewGame={resetGame} gamesPlayed={gamesPlayed} />
+      { isGameOver && (
+        <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
+          <p>Dommage vous avez perdu. Le mot était {mysteryWord}.</p>
+        </div>
+      )}
       <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
     </div>
   )
