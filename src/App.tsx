@@ -78,11 +78,11 @@ function App() {
 
       {/* Start a new game */}
       { isGameOver && (
-        <div class="text-white">
-            <h1>Voulez-vous rejouer ?</h1>
-            <div>
-              <p>oui</p>
-              <p>non</p>
+        <div className="flex flex-col gap-4 text-white">
+            <h1 className="text-center text-lg font-bold">Voulez-vous rejouer ?</h1>
+            <div className="flex justify-around">
+              <p onClick={resetGame} className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">oui</p>
+              <p className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">non</p>
             </div>
         </div>
       )}
