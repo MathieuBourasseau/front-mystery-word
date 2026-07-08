@@ -16,9 +16,14 @@ function App() {
   // State for color letters
   const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ "M": true, "G": true });
 
-  // Reset game and increment counter
+  // Reset game and increment counter of games played
   const resetGame = () => {
+
     setGamesPlayed(gamesPlayed + 1);
+    setHearts(5);
+    setMysteryWord("avancer".toUpperCase());
+    setColorLetter({"A" : true, "C": true});
+
   }
 
   // Send the letter clicked to the back for checking
@@ -46,6 +51,7 @@ function App() {
 
   // Show the word to guess from the real word
   const wordToGuess = mysteryWord.split("").map((letter) => {
+
     if (colorLetter[letter] === true) {
       return letter
     } else {
