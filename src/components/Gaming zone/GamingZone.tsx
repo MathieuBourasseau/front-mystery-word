@@ -29,16 +29,16 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
     }
 
     return (
-        <main className="flex flex-col gap-2 items-center justify-center text-white">
+        <main className="flex flex-col gap-2 items-center justify-center text-white mx-auto max-w-mobile md:max-w-tablet md:gap-6">
 
-            <h1 className="uppercase font-bold text-lg">Devinez le mot caché</h1>
+            <h1 className="uppercase font-bold text-lg md:text-2xl">Devinez le mot caché</h1>
 
             {/* Life remaining */}
-            <div className="flex flex-col  items-center w-full">
-                <span>Vies restantes : {hearts}</span>
+            <div className="flex flex-col gap-2 items-center w-full">
+                <span className="text-sm md:text-base lg:text-lg">Vies restantes : {hearts}</span>
                 <div>
                     {heartsArray.map((heart, index) => (
-                        <span key={index}>❤️</span>
+                        <span key={index} className="">❤️</span>
                     ))}
                 </div>
             </div>
@@ -56,7 +56,7 @@ export default function GamingZone({ hearts, mysteryWord, colorLetter, onLetterC
                         </span>
                     ))}
                 </div>
-                <div className="flex flex-wrap justify-center gap-4 border-1 rounded-sm p-2">
+                <div className="flex flex-wrap justify-center gap-4 border-1 rounded-sm p-2 ">
                     {alphabet.map((letter, index) => (
                         <button
                             key={index}

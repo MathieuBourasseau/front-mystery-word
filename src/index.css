@@ -5,6 +5,10 @@
 
   /* Custom colors */
   --color-primary-blue: #101828;
+
+  /* Custom width */
+  --container-mobile: 450px;
+  --container-tablet: 650px;
 }
 
 :root {
