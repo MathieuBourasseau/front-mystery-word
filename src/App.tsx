@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import GamingZone from "./components/Gaming zone/GamingZone";
 import { list, getRandomWord } from "./utils/words";
@@ -21,9 +21,9 @@ function App() {
   const firstLetter = mysteryWord[0];
 
   // State for color letters
-  const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({[firstLetter]: true});
+  const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ [firstLetter]: true });
 
-  // Reset game and increment counter of games played
+  // Function to reset the game
   const resetGame = () => {
     setGamesPlayed(gamesPlayed + 1);
     setHearts(5);
@@ -33,14 +33,14 @@ function App() {
     const newFirstLetter = newRandomWord[0];
 
     setMysteryWord(newRandomWord);
-    setColorLetter({[newFirstLetter]: true});
+    setColorLetter({ [newFirstLetter]: true });
   }
 
-  // Send the letter clicked to the back for checking
+  // Function to check user attempt
   const sendLetter = (letter: string) => {
 
     // Stop game if there is not more hearts left
-    if (hearts < 0){
+    if (hearts < 0) {
       return;
     }
 
@@ -69,6 +69,34 @@ function App() {
     }
   });
 
+  // Keydown event
+  useEffect(() => {
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+
+      const pressedKey = event.key.toUpperCase();
+
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+      // Checking that the letter sent is in alphabet
+      if (alphabet.includes(pressedKey)) {
+
+        // If the game is not over we send the pressed key to sendLetter
+        if (hearts > 0 && wordToGuess.includes(" ")) {
+          sendLetter(pressedKey)
+        };
+      };
+    };
+
+    // We bound the event to the window element
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Destroy the former event before executing again the handleKeyDown function
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [hearts, wordToGuess, sendLetter]);
+
   // Show end game messages
   const isGameLost = hearts === 0;
   const isGameWon = !wordToGuess.includes(" ");
@@ -79,31 +107,31 @@ function App() {
       <Header onNewGame={resetGame} gamesPlayed={gamesPlayed} />
 
       {/* Victory message */}
-      { isGameWon && (
+      {isGameWon && (
         <div className="bg-white text-blue-primary p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
           <p>Félicitations, vous avez découvert le bon mot ! 🎉 </p>
         </div>
       )}
 
       {/* Defeat message */}
-      { isGameLost && (
+      {isGameLost && (
         <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
           <p>Dommage vous avez perdu. Le mot était {mysteryWord}.</p>
         </div>
       )}
 
       {/* Start a new game */}
-      { isGameOver && (
+      {isGameOver && (
         <div className="flex flex-col gap-4 text-white">
-            <h1 className="text-center text-lg font-bold">Voulez-vous rejouer ?</h1>
-            <div className="flex justify-around">
-              <p onClick={resetGame} className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">oui</p>
-              <p className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">non</p>
-            </div>
+          <h1 className="text-center text-lg font-bold">Voulez-vous rejouer ?</h1>
+          <div className="flex justify-around">
+            <p onClick={resetGame} className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">oui</p>
+            <p className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">non</p>
+          </div>
         </div>
       )}
 
-      { !isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} /> }
+      {!isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />}
     </div>
   )
 }
