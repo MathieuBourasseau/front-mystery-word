@@ -1,6 +1,6 @@
 // Generate an array according to the value of hearts
-export const generateHeartsArray = (hearts : number) => {
-    return Array(hearts).fill(null)
+export const generateHeartsArray = (arrayLength : number) => {
+    return Array(maxHearts).fill(null)
 }
 
 // Create a button and its style according to the letter value

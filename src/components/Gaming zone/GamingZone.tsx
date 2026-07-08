@@ -1,5 +1,6 @@
 import type { GamingZoneProps } from "../../types/GamingZoneProps"
 import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa6";
 import { generateHeartsArray, getButtonStyle } from "./gamingZone.utils";
 
 // Create alphabet
@@ -7,7 +8,9 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export default function GamingZone({ hearts, wordToGuess, colorLetter, onLetterClick }: GamingZoneProps) {
 
-    const heartsArray = generateHeartsArray(hearts);
+    // Create an array with 5 fix slots
+    const maxHearts = 5;
+    const heartsArray = generateHeartsArray(maxHearts);
 
     return (
         <main className="flex flex-col gap-4 items-center justify-center text-white mx-auto max-w-mobile md:max-w-tablet md:gap-6">
@@ -18,8 +21,15 @@ export default function GamingZone({ hearts, wordToGuess, colorLetter, onLetterC
             <div className="flex flex-col gap-2 items-center w-full">
                 <span className="text-sm md:text-base lg:text-lg">Vies restantes : {hearts}</span>
                 <div className="flex gap-4">
+
+                    {/* Conditions to show full or empty hearts */}
+
                     {heartsArray.map((_, index) => (
-                        <FaHeart key={index} className="md:w-5 md:h-5 lg:w-6 lg:h-6" />
+                        index < hearts ? (
+                            <FaHeart key={index} className="md:w-5 md:h-5 lg:w-6 lg:h-6" />
+                        ):(
+                            <FaRegHeart key={index} className="md:w-5 md:h-5 lg:w-6 lg:h-6" />
+                        )
                     ))}
                 </div>
             </div>

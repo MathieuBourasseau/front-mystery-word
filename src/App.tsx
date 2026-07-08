@@ -37,13 +37,11 @@ function App() {
 
   // Show the word to guess from the real word
   const wordToGuess = mysteryWord.split("").map((letter) => {
-
     if (colorLetter[letter] === true) {
       return letter
     } else {
       return " "
     }
-
   });
 
   return (
