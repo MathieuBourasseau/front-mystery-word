@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header/Header";
 import GamingZone from "./components/Gaming zone/GamingZone";
+import { list, getRandomWord } from "./utils/words";
 
 function App() {
 
@@ -11,10 +12,13 @@ function App() {
   const [hearts, setHearts] = useState(5);
 
   // State for mystery word
-  const [mysteryWord, setMysteryWord] = useState("MANGER");
+  const [mysteryWord, setMysteryWord] = useState(getRandomWord(list));
+
+  // Save the first letter of the mystery word
+  const firstLetter = mysteryWord[0];
 
   // State for color letters
-  const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ "M": true, "G": true });
+  const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({[firstLetter]: true});
 
   // Reset game and increment counter of games played
   const resetGame = () => {
