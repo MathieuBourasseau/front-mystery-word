@@ -20,8 +20,11 @@ function App() {
   // Save the first letter of the mystery word
   const firstLetter = mysteryWord ? mysteryWord[0] : "";
 
+  // State for loading
+  const [isLoading, setIsLoading] = useState(true);
+  
   // State for error message
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   // State for color letters
   const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ [firstLetter]: true });
