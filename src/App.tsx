@@ -119,6 +119,7 @@ function App() {
     // Checking that the server answer is working
     if (!response.ok){
       console.error("Erreur lors du fetch pour afficher un mot aléatoire");
+      setIsLoading(false);
       setErrorMessage("Un problème est survenu lors du chargement du mot mystère.")
       return;
     };
@@ -131,6 +132,7 @@ function App() {
 
     setMysteryWord(fetchedWord);
     setColorLetter({ [fetchedWord[0]] : true}); 
+    setIsLoading(false);
 
     return 
 
@@ -173,7 +175,11 @@ function App() {
         </div>
       )}
 
-      {!isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />}
+      {isLoading ? (
+        <p>Chargement du jeu en cours ...</p>
+      ):(
+        isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
+      )}
     </div>
   )
 }
