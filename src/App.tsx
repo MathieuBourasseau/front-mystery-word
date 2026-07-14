@@ -26,6 +26,7 @@ function App() {
   const resetGame = () => {
 
     setIsLoading(true);
+    setErrorMessage("");
 
     setGamesPlayed(gamesPlayed + 1);
     setHearts(5);
