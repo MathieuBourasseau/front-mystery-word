@@ -18,7 +18,10 @@ function App() {
   const [mysteryWord, setMysteryWord] = useState(firstRandomWord);
 
   // Save the first letter of the mystery word
-  const firstLetter = mysteryWord[0];
+  const firstLetter = mysteryWord ? mysteryWord[0] : "";
+
+  // State for error message
+  const [errorMessage, setErrorMessage] = useState('');
 
   // State for color letters
   const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ [firstLetter]: true });
@@ -96,6 +99,45 @@ function App() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [hearts, wordToGuess, sendLetter]);
+
+  // Fetch random word
+  useEffect(() => {
+
+  const fetchRandomWord = async () => {
+
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    // Headers content
+    const headersContent = { "Content-Type": "application/json" };
+
+    // Consuming back API 
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: headersContent
+    });
+
+    // Checking that the server answer is working
+    if (!response.ok){
+      console.error("Erreur lors du fetch pour afficher un mot aléatoire");
+      setErrorMessage("Un problème est survenu lors du chargement du mot mystère.")
+      return;
+    };
+
+    // Data contain a object sent from the back { "id": 1, "name": "word"}
+    const data = await response.json();
+
+    // We select the key name that contains the word
+    const fetchedWord : string = data.name;
+
+    setMysteryWord(fetchedWord);
+    setColorLetter({ [fetchedWord[0]] : true}); 
+
+    return 
+
+  };
+
+  fetchRandomWord();
+}, []); 
 
   // Show end game messages
   const isGameLost = hearts === 0;
