@@ -58,5 +58,14 @@ export const useMysteryWord = () => {
     
       };
 
-
+      return {
+        mysteryWord,
+        colorLetter,
+        isLoading,
+        errorMessage,
+        fetchRandomWord,
+        setColorLetter,
+        setIsLoading,
+        setErrorMessage
+      };
 }
