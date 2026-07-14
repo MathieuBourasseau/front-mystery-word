@@ -3,9 +3,6 @@ import Header from "./components/Header/Header";
 import GamingZone from "./components/Gaming zone/GamingZone";
 import { list, getRandomWord } from "./utils/words";
 
-// Initialise first random word
-const firstRandomWord = getRandomWord(list);
-
 function App() {
 
   // State for games played
@@ -15,7 +12,7 @@ function App() {
   const [hearts, setHearts] = useState(5);
 
   // State for mystery word
-  const [mysteryWord, setMysteryWord] = useState(firstRandomWord);
+  const [mysteryWord, setMysteryWord] = useState("");
 
   // Save the first letter of the mystery word
   const firstLetter = mysteryWord ? mysteryWord[0] : "";
