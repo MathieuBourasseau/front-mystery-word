@@ -1,8 +1,21 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import GamingZone from "./components/Gaming zone/GamingZone";
+import { useMysteryWord } from "./hooks/useMysteryWord";
 
 function App() {
+
+  // Import all the states, setters and function required in App.tsx
+  const { 
+    mysteryWord, 
+    colorLetter, 
+    isLoading, 
+    errorMessage, 
+    fetchRandomWord, 
+    setColorLetter, 
+    setIsLoading, 
+    setErrorMessage 
+  } = useMysteryWord();
 
   // State for games played
   const [gamesPlayed, setGamesPlayed] = useState(0);
