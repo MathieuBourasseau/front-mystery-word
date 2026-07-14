@@ -12,6 +12,7 @@ function App() {
 
   // State for mystery word
   const [mysteryWord, setMysteryWord] = useState("");
+  console.log(mysteryWord)
 
   // State for loading
   const [isLoading, setIsLoading] = useState(true);
@@ -94,7 +95,7 @@ function App() {
       const data = await response.json();
 
       // We select the key name that contains the word
-      const fetchedWord: string = data.name;
+      const fetchedWord: string = data.name.toUpperCase();
 
       setMysteryWord(fetchedWord);
       setColorLetter({ [fetchedWord[0]]: true });
