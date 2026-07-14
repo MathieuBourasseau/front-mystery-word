@@ -14,9 +14,6 @@ function App() {
   // State for mystery word
   const [mysteryWord, setMysteryWord] = useState("");
 
-  // Save the first letter of the mystery word
-  const firstLetter = mysteryWord ? mysteryWord[0] : "";
-
   // State for loading
   const [isLoading, setIsLoading] = useState(true);
   
@@ -24,7 +21,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
 
   // State for color letters
-  const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({ [firstLetter]: true });
+  const [colorLetter, setColorLetter] = useState<Record<string, boolean>>({});
 
   // Function to reset the game
   const resetGame = () => {
