@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import GamingZone from "./components/Gaming zone/GamingZone";
-import { list, getRandomWord } from "./utils/words";
 
 function App() {
 
@@ -16,7 +15,7 @@ function App() {
 
   // State for loading
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // State for error message
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -74,31 +73,37 @@ function App() {
     // Headers content
     const headersContent = { "Content-Type": "application/json" };
 
-    // Consuming back API 
-    const response = await fetch(API_URL, {
-      method: "GET",
-      headers: headersContent
-    });
+    try {
 
-    // Checking that the server answer is working
-    if (!response.ok){
-      console.error("Erreur lors du fetch pour afficher un mot aléatoire");
+      // Consuming back API 
+      const response = await fetch(API_URL, {
+        method: "GET",
+        headers: headersContent
+      });
+
+      // Checking that the server answer is working
+      if (!response.ok) {
+        console.error("Erreur lors du fetch pour afficher un mot aléatoire");
+        setIsLoading(false);
+        setErrorMessage("Un problème est survenu lors du chargement du mot mystère.")
+        return;
+      };
+
+      // Data contain a object sent from the back { "id": 1, "name": "word"}
+      const data = await response.json();
+
+      // We select the key name that contains the word
+      const fetchedWord: string = data.name;
+
+      setMysteryWord(fetchedWord);
+      setColorLetter({ [fetchedWord[0]]: true });
       setIsLoading(false);
-      setErrorMessage("Un problème est survenu lors du chargement du mot mystère.")
+
       return;
-    };
 
-    // Data contain a object sent from the back { "id": 1, "name": "word"}
-    const data = await response.json();
-
-    // We select the key name that contains the word
-    const fetchedWord : string = data.name;
-
-    setMysteryWord(fetchedWord);
-    setColorLetter({ [fetchedWord[0]] : true}); 
-    setIsLoading(false);
-
-    return; 
+    } catch (error) {
+      
+    }
 
   };
 
@@ -133,8 +138,8 @@ function App() {
   // Fetch random word
   useEffect(() => {
 
-  fetchRandomWord();
-}, []); 
+    fetchRandomWord();
+  }, []);
 
   // Show end game messages
   const isGameLost = hearts === 0;
@@ -159,6 +164,13 @@ function App() {
         </div>
       )}
 
+      {/* Error message */}
+      {errorMessage && (
+        <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
+          <p>{errorMessage}</p>
+        </div>
+      )}
+
       {/* Start a new game */}
       {isGameOver && (
         <div className="flex flex-col gap-4 text-white">
@@ -172,7 +184,7 @@ function App() {
 
       {isLoading ? (
         <p>Chargement du jeu en cours ...</p>
-      ):(
+      ) : (
         !isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
       )}
     </div>
