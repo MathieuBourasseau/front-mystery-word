@@ -147,7 +147,7 @@ function App() {
 
   // Show end game messages
   const isGameLost = hearts === 0;
-  const isGameWon = !wordToGuess.includes(" ");
+  const isGameWon = !wordToGuess.includes(" ") && wordToGuess.length > 0;
   const isGameOver = isGameLost || isGameWon
 
   return (
