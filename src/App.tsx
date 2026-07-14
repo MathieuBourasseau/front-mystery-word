@@ -25,15 +25,13 @@ function App() {
 
   // Function to reset the game
   const resetGame = () => {
+
+    setIsLoading(true);
+
     setGamesPlayed(gamesPlayed + 1);
     setHearts(5);
 
-    // Pick a new random word
-    const newRandomWord = getRandomWord(list);
-    const newFirstLetter = newRandomWord[0];
-
-    setMysteryWord(newRandomWord);
-    setColorLetter({ [newFirstLetter]: true });
+    fetchRandomWord();
   }
 
   // Function to check user attempt
@@ -69,37 +67,6 @@ function App() {
     }
   });
 
-  // Keydown event
-  useEffect(() => {
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-
-      const pressedKey = event.key.toUpperCase();
-
-      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-      // Checking that the letter sent is in alphabet
-      if (alphabet.includes(pressedKey)) {
-
-        // If the game is not over we send the pressed key to sendLetter
-        if (hearts > 0 && wordToGuess.includes(" ")) {
-          sendLetter(pressedKey)
-        };
-      };
-    };
-
-    // We bound the event to the window element
-    window.addEventListener("keydown", handleKeyDown);
-
-    // Destroy the former event before executing again the handleKeyDown function
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [hearts, wordToGuess, sendLetter]);
-
-  // Fetch random word
-  useEffect(() => {
-
   const fetchRandomWord = async () => {
 
     const API_URL = import.meta.env.VITE_API_URL;
@@ -131,9 +98,40 @@ function App() {
     setColorLetter({ [fetchedWord[0]] : true}); 
     setIsLoading(false);
 
-    return 
+    return; 
 
   };
+
+  // Keydown event
+  useEffect(() => {
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+
+      const pressedKey = event.key.toUpperCase();
+
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+      // Checking that the letter sent is in alphabet
+      if (alphabet.includes(pressedKey)) {
+
+        // If the game is not over we send the pressed key to sendLetter
+        if (hearts > 0 && wordToGuess.includes(" ")) {
+          sendLetter(pressedKey)
+        };
+      };
+    };
+
+    // We bound the event to the window element
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Destroy the former event before executing again the handleKeyDown function
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [hearts, wordToGuess, sendLetter]);
+
+  // Fetch random word
+  useEffect(() => {
 
   fetchRandomWord();
 }, []); 
@@ -175,7 +173,7 @@ function App() {
       {isLoading ? (
         <p>Chargement du jeu en cours ...</p>
       ):(
-        isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
+        !isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
       )}
     </div>
   )
