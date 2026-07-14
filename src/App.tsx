@@ -102,8 +102,11 @@ function App() {
       return;
 
     } catch (error) {
-      
-    }
+
+      console.error(error);
+      setIsLoading(false);
+      setErrorMessage("Impossible de joindre le serveur.")
+    };
 
   };
 
