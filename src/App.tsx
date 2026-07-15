@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import GamingZone from "./components/Gaming zone/GamingZone";
 import { useMysteryWord } from "./hooks/useMysteryWord";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
@@ -111,43 +112,47 @@ function App() {
     <div className="flex flex-col gap-6 min-h-screen bg-gray-900 p-4 md:p-6">
       <Header onNewGame={resetGame} gamesPlayed={gamesPlayed} />
 
-      {/* Victory message */}
-      {isGameWon && (
-        <div className="bg-white text-blue-primary p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
-          <p>Félicitations, vous avez découvert le bon mot ! 🎉 </p>
-        </div>
-      )}
-
-      {/* Defeat message */}
-      {isGameLost && (
-        <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
-          <p>Dommage vous avez perdu. Le mot était {mysteryWord}.</p>
-        </div>
-      )}
-
-      {/* Error message */}
-      {errorMessage && (
-        <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
-          <p>{errorMessage}</p>
-        </div>
-      )}
-
-      {/* Start a new game */}
-      {isGameOver && (
-        <div className="flex flex-col gap-4 text-white">
-          <h1 className="text-center text-lg font-bold">Voulez-vous rejouer ?</h1>
-          <div className="flex justify-around">
-            <p onClick={resetGame} className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">oui</p>
-            <p className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">non</p>
+      <div className="flex-1 flex flex-col gap-6 justify-center">
+        {/* Victory message */}
+        {isGameWon && (
+          <div className="bg-white text-blue-primary p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
+            <p>Félicitations, vous avez découvert le bon mot ! 🎉 </p>
           </div>
-        </div>
-      )}
+        )}
 
-      {isLoading ? (
-        <p className="text-white">Chargement du jeu en cours ...</p>
-      ) : (
-        !isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
-      )}
+        {/* Defeat message */}
+        {isGameLost && (
+          <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
+            <p>Dommage vous avez perdu. Le mot était {mysteryWord}.</p>
+          </div>
+        )}
+
+        {/* Error message */}
+        {errorMessage && (
+          <div className="bg-white text-red-500 p-4 rounded-sm text-center font-bold text-sm mx-auto w-full max-w-mobile md:max-w-tablet">
+            <p>{errorMessage}</p>
+          </div>
+        )}
+
+        {/* Start a new game */}
+        {isGameOver && (
+          <div className="flex flex-col gap-4 text-white">
+            <h1 className="text-center text-lg font-bold">Voulez-vous rejouer ?</h1>
+            <div className="flex justify-around">
+              <p onClick={resetGame} className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">oui</p>
+              <p className="cursor-pointer border-1 py-2 px-5 uppercase hover:bg-white hover:text-primary-blue hover:font-bold">non</p>
+            </div>
+          </div>
+        )}
+
+        {isLoading ? (
+          <p className="text-white">Chargement du jeu en cours...</p>
+        ) : (
+          !isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
+        )}
+      </div>
+
+    <Footer/>
     </div>
   )
 }
