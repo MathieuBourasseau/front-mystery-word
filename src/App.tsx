@@ -146,7 +146,7 @@ function App() {
         )}
 
         {isLoading ? (
-          <p className="text-white">Chargement du jeu en cours...</p>
+          <p className="text-white text-center">Chargement du jeu en cours...</p>
         ) : (
           !isGameOver && <GamingZone hearts={hearts} wordToGuess={wordToGuess} colorLetter={colorLetter} onLetterClick={sendLetter} />
         )}
