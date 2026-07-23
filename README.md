@@ -20,7 +20,7 @@ Un jeu du pendu **"server-authoritative"** : le mot à deviner est choisi et vé
 ## Installation
 
 ```bash
-git clone https://github.com/<ton-compte>/front-mystery-word.git
+git clone https://github.com/<votre-compte>/front-mystery-word.git
 cd front-mystery-word
 npm install
 ```
@@ -29,19 +29,19 @@ npm install
 
 Le frontend communique avec l'API via la variable d'environnement `VITE_API_URL`.
 
-1. Copie le fichier d'exemple :
+1. Copiez le fichier d'exemple :
 
    ```bash
    cp .env.example .env
    ```
 
-2. Renseigne l'URL de ton backend Spring Boot dans `.env` :
+2. Renseignez l'URL de votre backend Spring Boot dans `.env` :
 
    ```env
    VITE_API_URL=https://backend-mystery-words.onrender.com/api/randomWord
    ```
 
-   Pour développer avec un backend lancé en local, utilise plutôt :
+   Pour développer avec un backend lancé en local, utilisez plutôt :
 
    ```env
    VITE_API_URL=http://localhost:8080/api/randomWord
